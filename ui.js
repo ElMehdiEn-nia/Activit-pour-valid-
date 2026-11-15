@@ -78,44 +78,11 @@ export function renderCount(n) {
  * - palier 2 : classe is-selected si la carte est dans le panier (cart.some(...))
  */
 export function renderGrid(list, cart) {
-  grid.innerHTML = ""
-  if (list.length === 0) {
-    grid.append(el("p", "empty", "Aucune carte trouvée"))
-    return
-  }
-  for (const li of list) {
-    const typeClas = typeClass(li.type)
-    const prix = formatPrix(li.prix)
-    const id = formatNumero(li.id)
-    let article = el("article", "card", "");
-    article.dataset.id = li.id
-    let img = el("img", "cardimg", "")
-    img.setAttribute("src", `${li.image}`)
-    img.setAttribute("alt", `${li.nom}`)
-    let p_1 = el("p", "cardnum", `${id}`)
-    let h_3 = el("h3", "cardname", `${li.nom}`)
-    let p_2 = el("p", "cardmeta", "")
-    let span_1 = el("span", badge`${typeClas}`, `${li.type}`)
-    let span_2 = el("span", "rarity", `${li.rarete}`)
-    p_2.append(span_1, span_2)
-    let p_3 = el("p", "card__price", `${prix}`)
-    let button = el("button", "btn btn--primary", "Ajouter")
-    button.setAttribute("type", "button")
-    button.dataset.add = li.id
-    if (li.stock === 0) {
-      article.classList.add("out-of-stock")
-      button.disabled = true
-    }
-    let inCart = cart.some((carts) => carts.id === li.id)
-    if (inCart) {
-      article.classList.add("is-selected")
-
-    }
-    article.append(img, p_1, h_3, p_2, p_3, button)
-    grid.append(article)
-
-  }
+  // TODO 1. Videz #grid
+  // TODO 2. Liste vide : ajoutez le message et arrêtez (return)
+  // TODO 3. Pour chaque carte : créez l'article et ses enfants, puis grid.append(article)
 }
+
 /**
  * Affiche la fiche d'une carte dans #detail : image, nom (h3), numéro + badge du type,
  * description, puis une liste <dl> : Rareté, Prix, Stock (« Rupture » si 0).
